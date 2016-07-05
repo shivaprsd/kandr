@@ -58,5 +58,5 @@ main()
         }
         putchar('\n');
     }
-    printf("Lengths of the words\n");
+    printf("lengths of the words\n");
 }

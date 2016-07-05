@@ -39,7 +39,7 @@ main()
         }
     }
     /* draw histogram */
-    printf("Length of word - occurence\n");
+    printf("length of word - occurence\n");
     for (i = 0; i < MAXLENGTH; ++i)
     {
         printf("%2d ", i+1);
