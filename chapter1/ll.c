@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define MAXLENGTH 100      /* maximum line length */
+#define MAXLENGTH 78       /* maximum line length */
 
 int get_line(char line[], int maxlength);
 void copy(char to[], char from[]);
