@@ -1,5 +1,5 @@
 #include <stdio.h>
-#define MAXLENGTH 1000      /* maximum line length */
+#define MAXLENGTH 100      /* maximum line length */
 
 int get_line(char line[], int maxlength);
 void copy(char to[], char from[]);
@@ -14,15 +14,20 @@ main()
 
     max = 0;
     while ((len = get_line(line, MAXLENGTH)) > 0)
-    {
         if (len > max)
         {
             max = len;
             copy(longest, line);
         }
-    }
     if (max > 0)            /* a line was read */
-        printf("%s", longest);
+    {
+        if (max == MAXLENGTH-1 && longest[MAXLENGTH-2]!='\n')
+        {
+            printf("longest line overflowed the set limit\n");
+            longest[MAXLENGTH-2] = '\n';
+        }
+        printf("%d %s", max-1, longest);    /* don't count null char */
+    }
     return 0;
 }
 
@@ -39,7 +44,7 @@ int get_line(char s[], int lim)
         s[i] = c;
         ++i;
     }
-    /*s[i] = '\0';        /* terminate the string */
+    s[i] = '\0';        /* terminate the string */
     return i;
 }
 
