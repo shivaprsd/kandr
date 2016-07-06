@@ -26,7 +26,7 @@ main()
             printf("longest line overflowed the set limit\n");
             longest[MAXLENGTH-2] = '\n';
         }
-        printf("%d %s", max-1, longest);    /* don't count null char */
+        printf("%d %s", max, longest);
     }
     return 0;
 }
