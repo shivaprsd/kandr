@@ -17,7 +17,11 @@ main()
             /* incr: spaces required to reach the next tabstop (see end) */
             while (blanks >= (incr = TABSTOP-pos%TABSTOP))
             {
-                putchar('\t');
+                /* if a single space would suffice to reach the next tabstop */
+                if (incr == 1)
+                    putchar(' ');   /* prefer blank instead of tab */
+                else
+                    putchar('\t');
                 pos = pos + incr;
                 blanks = blanks - incr;
             }
