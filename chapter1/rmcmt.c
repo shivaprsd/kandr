@@ -12,22 +12,28 @@ main()
     while ((c=getchar()) != EOF)
     {
         if (c == '/' && qt == OUT && cmt == OUT)
-        {
-            d = getchar();
-            if (d == '*')
-                cmt = IN;
-            else
+            while (c == '/' && cmt == OUT)
             {
-                putchar(c);
-                putchar(d);
+                d = getchar();
+                if (d == '*')
+                    cmt = IN;
+                else
+                {
+                    putchar(c);
+                    if (d != '/')
+                        putchar(d);
+                    c = d;
+                }
             }
-        }
         else if (c == '*' && qt == OUT && cmt == IN)
-        {
-           d = getchar();
-           if (d == '/')
-               cmt = OUT;
-        }
+            while (c == '*' && cmt == IN)
+            {
+                d = getchar();
+                if (d == '/')
+                    cmt = OUT;
+                else
+                    c = d;
+            }
         else if (c == '\"' && cmt == OUT)
         {
             if (qt == IN)
