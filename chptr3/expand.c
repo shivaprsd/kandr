@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #define MAXLENGTH 80        /* maximum string length */
 
 void expand(char s1[], char s2[]);
@@ -35,8 +36,10 @@ void expand(char s1[], char s2[])
         {
             beg = s1[i-1] + 1;  /* we have already copied the char before '-' */
             end = s1[i+1] - 1;  /* copy char after '-' in the next run of for */
-            while (beg <= end)
-                s2[j++] = beg++;
+            /* ranges should be alphabets/digits */
+            if (isalnum(beg) && isalnum(end))
+                while (beg <= end)
+                    s2[j++] = beg++;
         }
         else
             s2[j++] = s1[i];    /* copy other chars (including range-ends) */
