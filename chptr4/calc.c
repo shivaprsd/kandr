@@ -47,7 +47,6 @@ int get_line(char s[], int lim)
 void calc(char s[])
 {
     int i, j, opr;
-    double res;
     char c, opd[MAXOP];
     double operate(char operator, char operand[]);
     
@@ -57,6 +56,11 @@ void calc(char s[])
     { 
         if (c == ' ' || c == '\t')
             i++;
+        else if (c == '-' && isdigit(s[i+1]))
+        {
+            opd[j++] = '-';         /* negative number */
+            i++;
+        }
         else
         {
             if (isdigit(c))
@@ -81,11 +85,11 @@ void calc(char s[])
                 opr = c;
                 i++;
             }
-            res = operate(opr, opd);
+            operate(opr, opd);
         }
     }
     if (opr != -1)              /* some operation was performed */
-        printf("\t= %.8g\n", res);
+        printf("\t= %.8g\n", operate('\n', opd));
 }
 
 /* operate: perform operation opr on opd and manipulate stack */
@@ -98,8 +102,8 @@ double operate(char opr, char opd[])
     switch (opr)
     {
         case NUMBER:
-            push(op2 = atof(opd));
-            return op2;
+            push(atof(opd));
+            break;
         case '+':
             push(pop() + pop());
             break;
@@ -113,21 +117,20 @@ double operate(char opr, char opd[])
         case '/':
             op2 = pop();
             if (op2 == 0.0)
-            {
                 printf("error: division by 0\n");
-                return 0.0;
-            }
             else
                 push(pop() / op2);
             break;
+        case '\n':
+            return pop();
         case 'q':
             printf("(press Ctr+D to quit)\n");
-            return 0.0;
+            break;
         default:
             printf("error: unknown command %c\n", opr);
-            return 0.0;
+            break;
     }
-    return pop();
+    return 0.0;
 }
 
 /* push: push f onto stack */
