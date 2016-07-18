@@ -25,4 +25,36 @@ int str_end(char *s, char *t)
     return 0;
 }
 
+/* str_ncpy: copy atmost n chars from t to s */
+void str_ncpy(char *s, char *t, int n)
+{
+    while (n-- > 0 && (*s++ = *t++))
+        ;
+    if (n <= 0)         /* we met an early exit from the loop */
+        *s = '\0';
+}
+
+/* str_ncat: concatenate atmost n chars from t at the end of s */
+void str_ncat(char *s, char *t, int n)
+{
+    while (*s)          /* find end of s */
+        s++;
+    while (n-- > 0 && (*s++ = *t++))
+        ;
+    if (n <= 0)
+        *s = '\0';
+}
+
+/* str_ncmp: compare atmost n chars in s & t; returns lexicographical diff */
+int str_ncmp(char *s, char *t, int n)
+{
+    while (*s == *t)
+    {
+        if (*s == '\0' || --n <= 0)     /* we compare the chars at the top */
+            return 0;
+        s++, t++;
+    }
+    return *s - *t;
+}
+
 #endif
