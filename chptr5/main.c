@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include "str.c"
+#include "math.c"
 
 /* test functions written in the chapter */
 main()
 {
-    /* str_cat */
     char s1[15] = "hello, ";
     char s2[] = "world!";
+    int len = 0;
+    /* str_cat */
     str_cat(s1, s2);
     printf("%s\n", s1);
     /* str_end */
@@ -22,5 +24,11 @@ main()
     printf("after concatenation: %s\n", s1);
     /* str_ncmp */
     printf("to the first %d chars, s1 - s2 = %d\n", 4, str_ncmp(s1, s2, 4));
+    /* get_line */
+    len = get_line(s1, 15);
+    printf("%d %s", len, s1);
+    /* math: itoa */
+    itoa(len, s1, 4);
+    printf("in strings: %s\n", s1); 
     return 0;
 }

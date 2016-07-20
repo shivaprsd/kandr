@@ -1,3 +1,4 @@
+#include <stdio.h>
 #ifndef STR
 #define STR
 
@@ -55,6 +56,21 @@ int str_ncmp(char *s, char *t, int n)
         s++, t++;
     }
     return *s - *t;
+}
+
+/* get_line: read atmost lim chars into s; return length */
+int get_line(char *s, int lim)
+{
+    int c;
+    char *t;
+
+    t = s;              /* save the beginning of the string */
+    while (lim-- > 1 && (c=getchar()) != EOF && c != '\n')
+        *s++ = c;
+    if (c == '\n')
+        *s++ = c;
+    *s = '\0';          /* terminate the string */
+    return s - t;
 }
 
 #endif
